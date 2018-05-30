@@ -56,13 +56,13 @@ int ParseLineRC(char* ctemp){
 	  char *ct;
 	  int lenlin;
 #ifdef DEBUGPARSELINE
-	  WinFprintf(fp9,"ParseLineRC called with \"%s\" (len=%lu)\n",ctemp,strlen(ctemp));
+	  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"ParseLineRC called with \"%s\" (len=%lu)\n",ctemp,strlen(ctemp));
 #endif
 	  if (ParseLineRCNumItems != 0){
 			for(i=0;i<ParseLineRCNumItems;i++){
 				if(ParseLineRCItems[i] != NULL){
 #ifdef DEBUGPARSELINE
-	WinFprintf(fp9,"free being called in ParseLineRC for ParseLineRCItems[%i](=%llx)\n",i,(unsigned LONGLONG)ParseLineRCItems[i]);
+	dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"free being called in ParseLineRC for ParseLineRCItems[%i](=%llx)\n",i,(unsigned LONGLONG)ParseLineRCItems[i]);
 #endif
 					free(ParseLineRCItems[i]);
 					ParseLineRCItems[i] = NULL;
@@ -70,13 +70,13 @@ int ParseLineRC(char* ctemp){
 			}
 			if (ParseLineRCItems != NULL) {
 #ifdef DEBUGPARSELINE
-	WinFprintf(fp9,"free being called in ParseLineRC for ParseLineRCItems(=%llx)\n",(unsigned LONGLONG)ParseLineRCItems);
+	dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"free being called in ParseLineRC for ParseLineRCItems(=%llx)\n",(unsigned LONGLONG)ParseLineRCItems);
 #endif
 				free(ParseLineRCItems);
 			}
 			if (ParseLineRCfmtItem != NULL){
 #ifdef DEBUGPARSELINE
-	WinFprintf(fp9,"free being called in ParseLineRC for ParseLineRCfmtItem(=%llx)\n",(unsigned LONGLONG)ParseLineRCfmtItem);
+	dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"free being called in ParseLineRC for ParseLineRCfmtItem(=%llx)\n",(unsigned LONGLONG)ParseLineRCfmtItem);
 #endif
 				free(ParseLineRCfmtItem);
 			}
@@ -89,18 +89,18 @@ int ParseLineRC(char* ctemp){
 	  if (SetParseFmtfmt != 1) return (-1);
 	  if (ParseLineRCItems==NULL){
 #ifdef DEBUGPARSELINE
-			  WinFprintf(fp9,"calling calloc in ParseLineRC for ParseLineRCItems with nmemb=%i, size=%i\n",lenlin+2,(int)sizeof(char*));
+			  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"calling calloc in ParseLineRC for ParseLineRCItems with nmemb=%i, size=%i\n",lenlin+2,(int)sizeof(char*));
 #endif
 //	  if ((ParseLineRCItems = (char**)malloc(sizeof(char*)*(lenlin+2))) == NULL ){
 	  if ((ParseLineRCItems = (char**)calloc(lenlin+2,sizeof(char*))) == NULL ){
 
 #ifdef DEBUGPARSELINE
-			  WinFprintf(fp9,"calloc failed in ParseLineRC for ParseLineRCItems\n");
+			  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"calloc failed in ParseLineRC for ParseLineRCItems\n");
 #endif
 			  return(-1);
 		  }
 #ifdef DEBUGPARSELINE
-		  WinFprintf(fp9,"calloc called in ParseLineRC for ParseLineRCItems(=%llx) set to %lu (%i) bytes\n",(unsigned LONGLONG)ParseLineRCItems,_msize(ParseLineRCItems),(lenlin+2)*8);
+		  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"calloc called in ParseLineRC for ParseLineRCItems(=%llx) set to %lu (%i) bytes\n",(unsigned LONGLONG)ParseLineRCItems,_msize(ParseLineRCItems),(lenlin+2)*8);
 #endif
 //		  int tempi =_msize(ParseLineRCItems);
 //		  for(i=0;i<tempi;i++)*(char*)(ParseLineRCItems+i)=0;
@@ -108,28 +108,28 @@ int ParseLineRC(char* ctemp){
 	  if (ParseLineRCfmtItem==NULL){
 		  if ((ParseLineRCfmtItem = (int*)malloc(sizeof(int)*(lenlin+2))) == NULL ){
 #ifdef DEBUGPARSELINE
-			  WinFprintf(fp9,"malloc failed in ParseLineRC for ParseLineRCfmtItem\n");
+			  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"malloc failed in ParseLineRC for ParseLineRCfmtItem\n");
 #endif
 			  return(-1);
 		  }
 #ifdef DEBUGPARSELINE
-		  WinFprintf(fp9,"malloc called in ParseLineRC for ParseLineRCfmtItem(=%llx) set to %lu (%i) bytes\n",(unsigned LONGLONG)ParseLineRCfmtItem,_msize(ParseLineRCfmtItem),(lenlin+2)*4);
+		  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"malloc called in ParseLineRC for ParseLineRCfmtItem(=%llx) set to %lu (%i) bytes\n",(unsigned LONGLONG)ParseLineRCfmtItem,_msize(ParseLineRCfmtItem),(lenlin+2)*4);
 #endif
 	  }
 	  if ( SetParseFmtNumDelims == 0 || lenlin == 1 ) {
 		  if ( AddToParseList(ctemp, lenlin, 0) < 1 ) {
 #ifdef DEBUGPARSELINE
-			  WinFprintf(fp9,"AddToParseList special return of =-1\n");
+			  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"AddToParseList special return of =-1\n");
 #endif
 			  return (-1);
 		  }
 #ifdef DEBUGPARSELINE
-			  WinFprintf(fp9,"AddToParseList special return of =1\n");
+			  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"AddToParseList special return of =1\n");
 #endif
 		  return (1);
 /*		  if ( ( ParseLineRCItems[0] = (char*)malloc(sizeof(char)*(lenlin+2) ) ) == NULL ) {
 #ifdef DEBUG
-			  WinFprintf(fp9,"malloc failed in ParseLineRC for ParseLineRCItems[0]\n");
+			  dfprintf(__LINE__,__FILE__,TRACE,"malloc failed in ParseLineRC for ParseLineRCItems[0]\n");
 #endif
 			  return(-1);
 		  }
@@ -149,7 +149,7 @@ int ParseLineRC(char* ctemp){
 		  return (1); */
 	  }
 #ifdef DEBUGPARSELINE
-			  WinFprintf(fp9,"parsing line\n");
+			  dfprintf(__LINE__,__FILE__,DEBUGPARSELINE,"parsing line\n");
 #endif
 	  int c[2];
 	  int linum;
@@ -177,7 +177,7 @@ int ParseLineRC(char* ctemp){
 	      while ( c[0] != '\000')
 	      {
 #ifdef DEBUGPARSE
-	    	  WinFprintf(fp9,"c[1] = %c = 0x%x\n",c[1],c[1]);
+	    	  dfprintf(__LINE__,__FILE__,DEBUGPARSE,"c[1] = %c = 0x%x\n",c[1],c[1]);
 #endif
 	    	c[1] = ct[in];
 	    	in++;
@@ -192,7 +192,7 @@ int ParseLineRC(char* ctemp){
 	  		}
 	  		if (c[1] == '\n') {
 #ifdef DEBUGPARSE
-	  		WinFprintf(fp9,"c[1] == new line\n");
+	  		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"c[1] == new line\n");
 #endif
 	  			linum++;
 	  			colnum = 0;
@@ -204,26 +204,26 @@ int ParseLineRC(char* ctemp){
 /*	        	if ( _msize(ParseLineRCfmtItem) < (unsigned int)ParseLineRCNumItems*4 ) {
 	      		  if ((ParseLineRCItems = (char**)realloc(ParseLineRCItems,sizeof(char*)*(ParseLineRCNumItems+12))) == NULL ){
 #ifdef DEBUG
-	      			  WinFprintf(fp9,"realloc failed in ParseLineRC for ParseLineRCItems\n");
+	      			  dfprintf(__LINE__,__FILE__,TRACE,"realloc failed in ParseLineRC for ParseLineRCItems\n");
 #endif
 	      			  return(-1);
 	      		  }
 #ifdef DEBUG
-	      		  WinFprintf(fp9,"realloc for ParseLineRCItems set to %lu (%i) bytes\n",_msize(ParseLineRCItems),(ParseLineRCNumItems+12)*8);
+	      		  dfprintf(__LINE__,__FILE__,TRACE,"realloc for ParseLineRCItems set to %lu (%i) bytes\n",_msize(ParseLineRCItems),(ParseLineRCNumItems+12)*8);
 #endif
 	      		  if ((ParseLineRCfmtItem = (int*)realloc(ParseLineRCfmtItem,sizeof(int)*(ParseLineRCNumItems+12))) == NULL ){
 #ifdef DEBUG
-	      			  WinFprintf(fp9,"realloc failed in ParseLineRC for ParseLineRCfmtItem\n");
+	      			  dfprintf(__LINE__,__FILE__,TRACE,"realloc failed in ParseLineRC for ParseLineRCfmtItem\n");
 #endif
 	      			  return(-1);
 	      		  }
 #ifdef DEBUG
-	      		  WinFprintf(fp9,"realloc for ParseLineRCfmtItem set to %lu (%i) bytes\n",_msize(ParseLineRCfmtItem),(ParseLineRCNumItems+12)*4);
+	      		  dfprintf(__LINE__,__FILE__,TRACE,"realloc for ParseLineRCfmtItem set to %lu (%i) bytes\n",_msize(ParseLineRCfmtItem),(ParseLineRCNumItems+12)*4);
 #endif
 	      	  }
 	        	if ( ( ParseLineRCItems[ParseLineRCNumItems] = (char*)malloc(sizeof(char)*(lenlin-in+40)) ) == NULL ) {
 #ifdef DEBUG
-	        		WinFprintf(fp9,"malloc failed in ParseLineRC for ParseLineRCItems[%i]\n",ParseLineRCNumItems);
+	        		dfprintf(__LINE__,__FILE__,TRACE,"malloc failed in ParseLineRC for ParseLineRCItems[%i]\n",ParseLineRCNumItems);
 #endif
 	        		return(-1);
 	        	}
@@ -233,7 +233,7 @@ int ParseLineRC(char* ctemp){
 //	  		fprintf(f4,"%c", c[0]);
 	        	colnum++;
 #ifdef DEBUGPARSE
-	        	WinFprintf(fp9,"INITIAL sate, column = %i, c[0] = %c\n", colnum, c[0]);
+	        	dfprintf(__LINE__,__FILE__,DEBUGPARSE,"INITIAL sate, column = %i, c[0] = %c\n", colnum, c[0]);
 #endif
 	          if (c[0] == '#' ) {
 	        	  state = PRAGMA;
@@ -258,7 +258,7 @@ int ParseLineRC(char* ctemp){
 	          {
 	        	  state = DELIM1;
 #ifdef DEBUGPARSE
-	        	  WinFprintf(fp9,"INITIAL state found DELIM1, in = %i\n",in);
+	        	  dfprintf(__LINE__,__FILE__,DEBUGPARSE,"INITIAL state found DELIM1, in = %i\n",in);
 #endif
 	        	  break;
 	          }
@@ -267,7 +267,7 @@ int ParseLineRC(char* ctemp){
 	        	  state = DELIM0;
 	        	  PutToItem('\000', true, 0);
 #ifdef DEBUGPARSE
-	        	  WinFprintf(fp9,"INITIAL state found DELIM0, in = %i\n",in);
+	        	  dfprintf(__LINE__,__FILE__,DEBUGPARSE,"INITIAL state found DELIM0, in = %i\n",in);
 #endif
 	        	  break;
 	          }
@@ -275,7 +275,7 @@ int ParseLineRC(char* ctemp){
 	        	  state = ITEM;
 	        	  PutToItem(c[0], false, 0);
 #ifdef DEBUGPARSE
-	        	  WinFprintf(fp9,"INITIAL state found ITEM, in = %i\n",in);
+	        	  dfprintf(__LINE__,__FILE__,DEBUGPARSE,"INITIAL state found ITEM, in = %i\n",in);
 #endif
 	          }
 
@@ -288,7 +288,7 @@ int ParseLineRC(char* ctemp){
 	        		state = DELIM1;
 	        		PutToItem('\000', true, 0);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"ITEM state found DELIM1, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"ITEM state found DELIM1, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -297,7 +297,7 @@ int ParseLineRC(char* ctemp){
 	        		state = DELIM0;
 	        		PutToItem('\000', true, 0);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"ITEM state found DELIM0, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"ITEM state found DELIM0, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -305,7 +305,7 @@ int ParseLineRC(char* ctemp){
 	        		state = ITEM;
 	        		PutToItem(c[0], false, 0);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"ITEM state found ITEM, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"ITEM state found ITEM, in = %i\n",in);
 #endif
 	        	}
 	        	break;
@@ -317,7 +317,7 @@ int ParseLineRC(char* ctemp){
 	        		state = DELIM1;
 	        		PutToItem('\000', true, 3);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"STRING state found DELIM1, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"STRING state found DELIM1, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -325,7 +325,7 @@ int ParseLineRC(char* ctemp){
 	        		state = STRING;
 	        		PutToItem(c[0], false, 0);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"STRING state found STRING, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"STRING state found STRING, in = %i\n",in);
 #endif
 	        	}
 	        	break;
@@ -335,7 +335,7 @@ int ParseLineRC(char* ctemp){
 	        	if ( SetParseFmtfmt == 1 && isspace(c[0]) )
 	        	{
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM0 state found DELIM0, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM0 state found DELIM0, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -344,13 +344,13 @@ int ParseLineRC(char* ctemp){
 	        		state = DELIM0;
 	        		PutToItem('\000', true, 0);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM0 state found DELIM1, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM0 state found DELIM1, in = %i\n",in);
 #endif
 	        		break;
 	        	}
 	        	else if (c[0] == '/' && c[1] == '/') {
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM0 state found //, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM0 state found //, in = %i\n",in);
 #endif
 	        		return(0);
 	        	}
@@ -358,7 +358,7 @@ int ParseLineRC(char* ctemp){
 	        	{
 	        		state = CCOMMENT00;
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM0 state found CCOMMENT00, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM0 state found CCOMMENT00, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -366,7 +366,7 @@ int ParseLineRC(char* ctemp){
 	        	{
 	        		state = STRING;
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM0 state found STRING, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM0 state found STRING, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -374,7 +374,7 @@ int ParseLineRC(char* ctemp){
 	        		state = ITEM;
 	        		PutToItem(c[0], false, 0);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM0 state found ITEM, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM0 state found ITEM, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -384,7 +384,7 @@ int ParseLineRC(char* ctemp){
 	        	if ( SetParseFmtfmt == 1 && isspace(c[0]) )
 	        	{
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM1 state found DELIM0, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM1 state found DELIM0, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -392,13 +392,13 @@ int ParseLineRC(char* ctemp){
 	        	{
 	        		state = DELIM0;
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM1 state found DELIM1, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM1 state found DELIM1, in = %i\n",in);
 #endif
 	        		break;
 	        	}
 	        	else if (c[0] == '/' && c[1] == '/') {
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM1 state found //, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM1 state found //, in = %i\n",in);
 #endif
 	        		return(0);
 	        	}
@@ -406,7 +406,7 @@ int ParseLineRC(char* ctemp){
 	        	{
 	        		state = CCOMMENT00;
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM1 state found CCOMMENT00, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM1 state found CCOMMENT00, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -414,7 +414,7 @@ int ParseLineRC(char* ctemp){
 	        	{
 	        		state = STRING;
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM1 state found STRING, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM1 state found STRING, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -422,7 +422,7 @@ int ParseLineRC(char* ctemp){
 	        		state = ITEM;
 	        		PutToItem(c[0], false, 0);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"DELIM1 state found ITEM, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"DELIM1 state found ITEM, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -499,7 +499,7 @@ int ParseLineRC(char* ctemp){
 	        	{
 	        		state = PRAGMA;
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"PRAGMA state found DELIM1, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"PRAGMA state found DELIM1, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -507,7 +507,7 @@ int ParseLineRC(char* ctemp){
 	        	{
 	        		state = PRAGMA;
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"PRAGMA state found DELIM0, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"PRAGMA state found DELIM0, in = %i\n",in);
 #endif
 	        		break;
 	        	}
@@ -515,7 +515,7 @@ int ParseLineRC(char* ctemp){
 	        		state = ITEM;
 	        		PutToItem(c[0], false, 0);
 #ifdef DEBUGPARSE
-	        		WinFprintf(fp9,"PRAGMA state found ITEM, in = %i\n",in);
+	        		dfprintf(__LINE__,__FILE__,DEBUGPARSE,"PRAGMA state found ITEM, in = %i\n",in);
 #endif
 	        	}
 	        	break;
@@ -526,7 +526,7 @@ int ParseLineRC(char* ctemp){
 	   }  // end of while  ...
 
 #ifdef DEBUGPARSE
-	WinFprintf(fp9,"at EOL state , DELIM1 = %ui, %ui\n", state, DELIM1);
+	dfprintf(__LINE__,__FILE__,DEBUGPARSE,"at EOL state , DELIM1 = %ui, %ui\n", state, DELIM1);
 #endif
 
 	if ( state != DELIM1 ) PutToItem('\000', true, 0);
@@ -534,12 +534,12 @@ int ParseLineRC(char* ctemp){
 	if ( ParseLineRCNumItems == 0  ) {
 			  if ( AddToParseList(ctemp, lenlin, 0) < 1 ) {
 #ifdef DEBUGPARSELIST
-				  WinFprintf(fp9,"AddToParseList second special return of =-1\n");
+				  dfprintf(__LINE__,__FILE__,DEBUGPARSELIST,"AddToParseList second special return of =-1\n");
 #endif
 				  return (-1);
 			  }
 #ifdef DEBUGPARSELIST
-				  WinFprintf(fp9,"AddToParseList second special return of =1\n");
+				  dfprintf(__LINE__,__FILE__,DEBUGPARSELIST,"AddToParseList second special return of =1\n");
 #endif
 	}
 */

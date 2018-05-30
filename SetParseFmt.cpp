@@ -57,7 +57,7 @@ void SetParseFmt(int fmt, int numdelim, ...){
 	}
 	if ( SetParseFmtNumDelims != 0 ) {
 #ifdef DEBUG
-	WinFprintf(fp9,"SetParseFmt problem at line %i. Data not properly initilaized prior to call...\n");
+	dfprintf(__LINE__,__FILE__,TRACE,"SetParseFmt problem at line %i. Data not properly initilaized prior to call...\n");
 #endif
 		return;
 	}
@@ -66,7 +66,7 @@ void SetParseFmt(int fmt, int numdelim, ...){
 	SetParseFmtDelims = (char**)realloc(SetParseFmtDelims,sizeof(char*)*numdelim);
 	if (SetParseFmtDelims == NULL) {
 #ifdef DEBUG
-	WinFprintf(fp9,"SetParseFmt unable to allocate space for delims\n");
+	dfprintf(__LINE__,__FILE__,TRACE,"SetParseFmt unable to allocate space for delims\n");
 #endif
 		return;
 	}
@@ -77,7 +77,7 @@ void SetParseFmt(int fmt, int numdelim, ...){
 		SetParseFmtDelims[i] = (char*)calloc(1,sizeof(char)*strlen(delim));
 		if(SetParseFmtDelims[i] == NULL){
 #ifdef DEBUG
-	WinFprintf(fp9,"SetParseFmt unable to allocate space for SetParseFmtDelims[%i]\n",i);
+	dfprintf(__LINE__,__FILE__,TRACE,"SetParseFmt unable to allocate space for SetParseFmtDelims[%i]\n",i);
 #endif
 		return;
 		}
@@ -85,9 +85,9 @@ void SetParseFmt(int fmt, int numdelim, ...){
 	}
 	va_end(args);
 #ifdef DEBUGSETPARSEFMT
-	WinFprintf(fp9,"SetParseFmt delims = ");
-	for(i=0;i<SetParseFmtNumDelims;i++) WinFprintf(fp9,"\"%s\"   ",SetParseFmtDelims[i]);
-	WinFprintf(fp9,"\n");
+	dfprintf(__LINE__,__FILE__,DEBUGSETPARSEFMT,"SetParseFmt delims = ");
+	for(i=0;i<SetParseFmtNumDelims;i++) dfprintf(__LINE__,__FILE__,DEBUGSETPARSEFMT,"\"%s\"   ",SetParseFmtDelims[i]);
+	dfprintf(__LINE__,__FILE__,DEBUGSETPARSEFMT,"\n");
 #endif
 	return;
 }
