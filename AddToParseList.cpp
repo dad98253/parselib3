@@ -17,12 +17,17 @@
 
 //#include "StdAfx.h"
 
+#ifndef BSD
 #include <malloc.h>
+#else	// BSD
+#include <stdlib.h>
+#endif	// BSD
 #include <ctype.h>
 #include <string.h>
 
 //#include "Resources.h"
 #include "parselib01.h"
+#include "debug.h"
 
 int AddToParseList(char * ctemp, int lenlin, int datatype){
 	int i;

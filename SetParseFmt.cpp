@@ -26,6 +26,7 @@
 #endif	// BSD
 #include <string.h>
 #include "parselib01.h"
+#include "debug.h"
 //#include "Resources.h"
 
 void SetParseFmt(int fmt, int numdelim, ...){

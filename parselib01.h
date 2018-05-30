@@ -19,7 +19,7 @@
 #define INITSNULL
 #define INITBUFFERSIZE
 #define INITDIRSIZE
-#else  // RESDEFS
+#else  // PARSELIBMAIN
 #define EXTERN
 #define INITIZERO	=0
 #define INITSZERO	={0}
@@ -29,7 +29,7 @@
 #define INITSNULL	={NULL}
 #define INITBUFFERSIZE	=BUFFERSIZE
 #define INITDIRSIZE		=DIRSIZE
-#endif  // RESDEFS
+#endif  // PARSELIBMAIN
 
 
 #define NUMCFHANDLES	20

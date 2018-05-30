@@ -16,7 +16,11 @@
 #endif
 #include <string.h>
 #include <stdlib.h>
+#ifndef BSD
 #include <malloc.h>
+#else	// BSD
+#include <stdlib.h>
+#endif	// BSD
 #include <stdio.h>
 
 

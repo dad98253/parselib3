@@ -19,7 +19,11 @@
 //#include <stdlib.h>
 //#include <tchar.h>
 
+#ifndef BSD
 #include <malloc.h>
+#else	// BSD
+#include <stdlib.h>
+#endif	// BSD
 #ifdef WINDOZE
 #include <stdarg.h>
 //#include <string>
@@ -29,6 +33,7 @@
 #include <string.h>
 #endif
 #include "msgbox.h"
+#include "debug.h"
 //#include "options.h"
 //#include "globals.h"
 //#include "passwin.h"
