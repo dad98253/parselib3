@@ -18,7 +18,11 @@
 //#include "StdAfx.h"
 
 #include <ctype.h>
+#ifndef BSD
 #include <malloc.h>
+#else	// BSD
+#include <stdlib.h>
+#endif	// BSD
 #include <ctype.h>
 #include <string.h>
 

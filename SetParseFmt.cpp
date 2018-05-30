@@ -19,7 +19,11 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#ifndef BSD
 #include <malloc.h>
+#else	// BSD
+#include <stdlib.h>
+#endif	// BSD
 #include <string.h>
 #include "parselib01.h"
 //#include "Resources.h"
