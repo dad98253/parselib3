@@ -22,7 +22,7 @@
 #include "parselib01.h"
 
 #define BOOL bool
-#ifndef WINDOZE
+#ifndef TRUE
 #define TRUE true
 #define FALSE false
 #endif
