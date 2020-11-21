@@ -51,7 +51,7 @@ int ReplaceText2( const char * szStringIn , char ** lpsEditedString , int NumRep
 	int * nSubs = NULL;
 
 #ifdef DEBUG
-	dfprintf(__LINE__,__FILE__,TRACE, "calling ReplaceText2, NumReplacements = %i\n", NumReplacements);
+	dfprintf2(__LINE__,__FILE__,TRACE, "calling ReplaceText2, NumReplacements = %i\n", NumReplacements);
 #endif
 
 	if ( NumReplacements > 0 )
@@ -59,7 +59,7 @@ int ReplaceText2( const char * szStringIn , char ** lpsEditedString , int NumRep
 		StringToReplaceList = (char **)malloc( NumReplacements*sizeof(*StringToReplaceList) );
 		if ( StringToReplaceList == NULL ) {
 #ifdef DEBUG
-		dfprintf(__LINE__,__FILE__,TRACE, "malloc for StringToReplaceList failed at line %i in ReplaceText2\n", __LINE__);
+		dfprintf2(__LINE__,__FILE__,TRACE, "malloc for StringToReplaceList failed at line %i in ReplaceText2\n", __LINE__);
 #endif
 		MsgBox("out of memory at line %i in ReplaceText2",__LINE__);
 		return(-999);
@@ -67,7 +67,7 @@ int ReplaceText2( const char * szStringIn , char ** lpsEditedString , int NumRep
 		SubstituteStringList = (char **)malloc( NumReplacements*sizeof(*SubstituteStringList) );
 		if ( SubstituteStringList == NULL ) {
 #ifdef DEBUG
-		dfprintf(__LINE__,__FILE__,TRACE, "malloc for SubstituteStringList failed at line %i in ReplaceText2\n", __LINE__);
+		dfprintf2(__LINE__,__FILE__,TRACE, "malloc for SubstituteStringList failed at line %i in ReplaceText2\n", __LINE__);
 #endif
 		MsgBox("out of memory at line %i in ReplaceText2",__LINE__);
 		return(-999);
@@ -75,7 +75,7 @@ int ReplaceText2( const char * szStringIn , char ** lpsEditedString , int NumRep
 		iPos = (int *)malloc( NumReplacements*sizeof(*iPos) );
 		if ( iPos == NULL ) {
 #ifdef DEBUG
-		dfprintf(__LINE__,__FILE__,TRACE, "malloc for iPos failed at line %i in ReplaceText2\n", __LINE__);
+		dfprintf2(__LINE__,__FILE__,TRACE, "malloc for iPos failed at line %i in ReplaceText2\n", __LINE__);
 #endif
 		MsgBox("out of memory at line %i in ReplaceText2",__LINE__);
 		return(-999);
@@ -83,16 +83,16 @@ int ReplaceText2( const char * szStringIn , char ** lpsEditedString , int NumRep
 		nSubs = (int *)malloc( NumReplacements*sizeof(*nSubs) );
 		if ( nSubs == NULL ) {
 #ifdef DEBUG
-		dfprintf(__LINE__,__FILE__,TRACE, "malloc for nSubs failed at line %i in ReplaceText2\n", __LINE__);
+		dfprintf2(__LINE__,__FILE__,TRACE, "malloc for nSubs failed at line %i in ReplaceText2\n", __LINE__);
 #endif
 		MsgBox("out of memory at line %i in ReplaceText2",__LINE__);
 		return(-999);
 		}
 #ifdef DEBUG
-		dfprintf(__LINE__,__FILE__,TRACE, "sizeof StringToReplaceList(0x%x-0x%x) = %i\n", StringToReplaceList,StringToReplaceList+NumReplacements*sizeof(*StringToReplaceList),NumReplacements*sizeof(*StringToReplaceList));
-		dfprintf(__LINE__,__FILE__,TRACE, "sizeof SubstituteStringList(0x%x-0x%x) = %i\n", SubstituteStringList,SubstituteStringList+NumReplacements*sizeof(*SubstituteStringList),NumReplacements*sizeof(*SubstituteStringList));
-		dfprintf(__LINE__,__FILE__,TRACE, "sizeof iPos(0x%x-0x%x) = %i\n",iPos,iPos+NumReplacements*sizeof(*iPos),NumReplacements*sizeof(*iPos));
-		dfprintf(__LINE__,__FILE__,TRACE, "sizeof nSubs(0x%x-0x%x) = %i\n", nSubs,nSubs+NumReplacements*sizeof(*nSubs),NumReplacements*sizeof(*nSubs));
+		dfprintf2(__LINE__,__FILE__,TRACE, "sizeof StringToReplaceList(0x%x-0x%x) = %i\n", StringToReplaceList,StringToReplaceList+NumReplacements*sizeof(*StringToReplaceList),NumReplacements*sizeof(*StringToReplaceList));
+		dfprintf2(__LINE__,__FILE__,TRACE, "sizeof SubstituteStringList(0x%x-0x%x) = %i\n", SubstituteStringList,SubstituteStringList+NumReplacements*sizeof(*SubstituteStringList),NumReplacements*sizeof(*SubstituteStringList));
+		dfprintf2(__LINE__,__FILE__,TRACE, "sizeof iPos(0x%x-0x%x) = %i\n",iPos,iPos+NumReplacements*sizeof(*iPos),NumReplacements*sizeof(*iPos));
+		dfprintf2(__LINE__,__FILE__,TRACE, "sizeof nSubs(0x%x-0x%x) = %i\n", nSubs,nSubs+NumReplacements*sizeof(*nSubs),NumReplacements*sizeof(*nSubs));
 #endif
 		int i;
 		int iDeltaSizeToWrite = 0;
@@ -106,7 +106,7 @@ int ReplaceText2( const char * szStringIn , char ** lpsEditedString , int NumRep
 			LPSTR lpsStringToReplace = *(StringToReplaceList+i);
 #ifdef DEBUG
 			LPSTR SubstituteString = *(SubstituteStringList+i);
-			dfprintf(__LINE__,__FILE__,TRACE, "for i = %i, lpsStringToReplace = \"%s\", SubstituteString = \"%s\"\n", i, lpsStringToReplace, SubstituteString);
+			dfprintf2(__LINE__,__FILE__,TRACE, "for i = %i, lpsStringToReplace = \"%s\", SubstituteString = \"%s\"\n", i, lpsStringToReplace, SubstituteString);
 #endif
 			int LenOriginal = strlen(lpsStringToReplace);
 			char* lpstrloc = strstr(lpsResourceData , lpsStringToReplace);
@@ -125,9 +125,9 @@ int ReplaceText2( const char * szStringIn , char ** lpsEditedString , int NumRep
 				*(iPos+i) = -1;
 #ifdef DEBUG
 			if ( LenResource > 150 ) {
-				dfprintf(__LINE__,__FILE__,TRACE, "Could Not Find \"%s\" in the text supplied\n", lpsStringToReplace);
+				dfprintf2(__LINE__,__FILE__,TRACE, "Could Not Find \"%s\" in the text supplied\n", lpsStringToReplace);
 			} else {
-				dfprintf(__LINE__,__FILE__,TRACE, "Could Not Find \"%s\" in the following text:\n%s\n", lpsStringToReplace,lpsResourceData);
+				dfprintf2(__LINE__,__FILE__,TRACE, "Could Not Find \"%s\" in the following text:\n%s\n", lpsStringToReplace,lpsResourceData);
 			}
 #endif
 				return (-2);
@@ -184,7 +184,7 @@ int ReplaceText2( const char * szStringIn , char ** lpsEditedString , int NumRep
 			{
 				*(iPos+iNextReplaceIndex) = iSizeToWrite+2;
 #ifdef DEBUG
-				dfprintf(__LINE__,__FILE__,TRACE, "Imposible error at line %i for %s at position %i \n", __LINE__, lpsStringToReplace, *(iPos+iNextReplaceIndex));
+				dfprintf2(__LINE__,__FILE__,TRACE, "Imposible error at line %i for %s at position %i \n", __LINE__, lpsStringToReplace, *(iPos+iNextReplaceIndex));
 #endif
 				break;
 			}

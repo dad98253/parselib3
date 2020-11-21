@@ -34,11 +34,11 @@ int PutToItem(char ctemp, bool bpush, int datatype){
 	int lenlin;
 #ifdef DEBUGPUTTOITEM
 	if (ctemp == '\000' ) {
-			dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM, "PutToItem called with zero ctemp, push = %u, type = %i\n", bpush, datatype);
+			dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM, "PutToItem called with zero ctemp, push = %u, type = %i\n", bpush, datatype);
 	} else {
-		  dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM, "PutToItem called with ctemp = \"%c\", push = %u, type = %i\n", ctemp,  bpush, datatype);
+		  dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM, "PutToItem called with ctemp = \"%c\", push = %u, type = %i\n", ctemp,  bpush, datatype);
 	}
-	dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"ParseLineRCNumItems = %i, ParseLineRCItems[ParseLineRCNumItems] = 0x%llx\n",ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems]);
+	dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"ParseLineRCNumItems = %i, ParseLineRCItems[ParseLineRCNumItems] = 0x%llx\n",ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems]);
 #endif
 	if(ParseLineRCItems[ParseLineRCNumItems] != NULL ) {
 		lenlin = strlen(ParseLineRCItems[ParseLineRCNumItems]);
@@ -46,12 +46,12 @@ int PutToItem(char ctemp, bool bpush, int datatype){
 		lenlin = 6000000;
 	}
 #ifdef DEBUGPUTTOITEM
-	dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"ParseLineRCItems[%i](=%llx), lenlin=%i, LengthOfInputLine=%i\n",ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems],lenlin,LengthOfInputLine);
+	dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"ParseLineRCItems[%i](=%llx), lenlin=%i, LengthOfInputLine=%i\n",ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems],lenlin,LengthOfInputLine);
 #endif
 	if ( lenlin > LengthOfInputLine ){ ////////////////////////////////////////////////////////
 		  if ( ( ParseLineRCItems[ParseLineRCNumItems] = (char*)realloc(ParseLineRCItems[ParseLineRCNumItems],sizeof(char)*(LengthOfInputLine+22) ) ) == NULL ) {
 #ifdef DEBUGPUTTOITEM
-			  dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"realloc failed in PutToItem for ParseLineRCItems[%i] increase\n",ParseLineRCNumItems);
+			  dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"realloc failed in PutToItem for ParseLineRCItems[%i] increase\n",ParseLineRCNumItems);
 #endif
 			  return(-1);
 		  }
@@ -61,15 +61,15 @@ int PutToItem(char ctemp, bool bpush, int datatype){
 		*ParseLineRCItems[ParseLineRCNumItems] = '\000';
 		lenlin = strlen(ParseLineRCItems[ParseLineRCNumItems]);
 #ifdef DEBUGPUTTOITEM
-		dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"at (lenlin == 6000000) in PutToItem, new lenlin=%i, ParseLineRCItems[%i](=%llx), *ParseLineRCItems[%i] = 0x%x\n",lenlin,ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems],ParseLineRCNumItems,*ParseLineRCItems[ParseLineRCNumItems]);
+		dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"at (lenlin == 6000000) in PutToItem, new lenlin=%i, ParseLineRCItems[%i](=%llx), *ParseLineRCItems[%i] = 0x%x\n",lenlin,ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems],ParseLineRCNumItems,*ParseLineRCItems[ParseLineRCNumItems]);
 #endif
 	}
 	  *(ParseLineRCItems[ParseLineRCNumItems]+lenlin) = ctemp;
 #ifdef DEBUGPUTTOITEM
 	  if (ctemp == '\000') {
-		dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"ctemp(=NULL) stuffed into *ParseLineRCItems[%i] at 0x%llx\n",ParseLineRCNumItems,(unsigned long long)(ParseLineRCItems[ParseLineRCNumItems]+lenlin));
+		dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"ctemp(=NULL) stuffed into *ParseLineRCItems[%i] at 0x%llx\n",ParseLineRCNumItems,(unsigned long long)(ParseLineRCItems[ParseLineRCNumItems]+lenlin));
 	  } else {
-		dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"ctemp(=%c) stuffed into *ParseLineRCItems[%i] at 0x%llx\n",*(ParseLineRCItems[ParseLineRCNumItems]+lenlin),ParseLineRCNumItems,(unsigned long long)(ParseLineRCItems[ParseLineRCNumItems]+lenlin));
+		dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"ctemp(=%c) stuffed into *ParseLineRCItems[%i] at 0x%llx\n",*(ParseLineRCItems[ParseLineRCNumItems]+lenlin),ParseLineRCNumItems,(unsigned long long)(ParseLineRCItems[ParseLineRCNumItems]+lenlin));
 	  }
 #endif
 	  lenlin++;
@@ -92,24 +92,24 @@ int PutToItem(char ctemp, bool bpush, int datatype){
 	  if(lenlin == 0)ParseLineRCfmtItem[ParseLineRCNumItems] = 0;
 	  if ( bpush ) {
 #ifdef DEBUGPUTTOITEM
-	dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"realloc being called in PutToItem for ParseLineRCItems[%i](=%llx), lenlin=%i\n",ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems],lenlin+2);
+	dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"realloc being called in PutToItem for ParseLineRCItems[%i](=%llx), lenlin=%i\n",ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems],lenlin+2);
 #endif
 		  if ( ( ParseLineRCItems[ParseLineRCNumItems] = (char*)realloc(ParseLineRCItems[ParseLineRCNumItems],sizeof(char)*(lenlin+2) ) ) == NULL ) {
 #ifdef DEBUGPUTTOITEM
-			  dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"realloc failed in PutToItem for ParseLineRCItems[0]\n");
+			  dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"realloc failed in PutToItem for ParseLineRCItems[0]\n");
 #endif
 			  return(-1);
 		  }
 		  ParseLineRCNumItems++;
 		  if ( ( ParseLineRCItems[ParseLineRCNumItems] = (char*)malloc(sizeof(char)*(LengthOfInputLine+2) ) ) == NULL ) {
 #ifdef DEBUGPUTTOITEM
-			  dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"malloc failed in PutToItem for ParseLineRCItems[0]\n");
+			  dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"malloc failed in PutToItem for ParseLineRCItems[0]\n");
 #endif
 			  return(-1);
 		  }
 		  *ParseLineRCItems[ParseLineRCNumItems] = '\000';
 #ifdef DEBUGPUTTOITEM
-		  dfprintf(__LINE__,__FILE__,DEBUGPUTTOITEM,"malloc called in PutToItem for ParseLineRCItems[%i](=%llx), lenlin=%i\n",ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems],LengthOfInputLine+2);
+		  dfprintf2(__LINE__,__FILE__,DEBUGPUTTOITEM,"malloc called in PutToItem for ParseLineRCItems[%i](=%llx), lenlin=%i\n",ParseLineRCNumItems,(unsigned long long)ParseLineRCItems[ParseLineRCNumItems],LengthOfInputLine+2);
 #endif
 	  }
 	  return (ParseLineRCNumItems);

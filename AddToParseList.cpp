@@ -33,15 +33,15 @@ int AddToParseList(char * ctemp, int lenlin, int datatype){
 	int i;
 #ifdef DEBUGPARSELIST
 	if (ctemp[lenlin] != '\000' ) {
-			dfprintf(__LINE__,__FILE__,DEBUGPARSELIST, "AddToParseList called with non terminated ctemp, lenlin = %i\n", lenlin );
+			dfprintf2(__LINE__,__FILE__,DEBUGPARSELIST, "AddToParseList called with non terminated ctemp, lenlin = %i\n", lenlin );
 	} else {
-		  dfprintf(__LINE__,__FILE__,DEBUGPARSELIST, "AddToParseList called with ctemp = \"%s\", lenlin = %i\n", ctemp , lenlin );
+		  dfprintf2(__LINE__,__FILE__,DEBUGPARSELIST, "AddToParseList called with ctemp = \"%s\", lenlin = %i\n", ctemp , lenlin );
 	}
-	dfprintf(__LINE__,__FILE__,DEBUGPARSELIST,"ParseLineRCNumItems = %i\n",ParseLineRCNumItems);
+	dfprintf2(__LINE__,__FILE__,DEBUGPARSELIST,"ParseLineRCNumItems = %i\n",ParseLineRCNumItems);
 #endif
 	if ( ( ParseLineRCItems[ParseLineRCNumItems] = (char*)malloc(sizeof(char)*(lenlin+2) ) ) == NULL ) {
 #ifdef DEBUG
-		  dfprintf(__LINE__,__FILE__,TRACE,"malloc failed in AddToParseList for ParseLineRCItems[0]\n");
+		  dfprintf2(__LINE__,__FILE__,TRACE,"malloc failed in AddToParseList for ParseLineRCItems[0]\n");
 #endif
 		  return(-1);
 	}
